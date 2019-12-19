@@ -39,6 +39,8 @@ public class MapDto implements Serializable {
     private String imageUrl;
 
     private List<PathDto> pathDtos;
+    /** 顶点数 */
+    private int points;
 
     /**
      * 创建时间
