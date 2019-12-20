@@ -22,7 +22,6 @@ public class Graph {
 //    private MapServiceImpl mapService = ApplicationContextUtil.getBean(MapServiceImpl.class);
 
 
-
     public Graph(boolean directed,String[] g) {
 
         this.directed = directed;
@@ -97,7 +96,7 @@ public class Graph {
         throw new IllegalArgumentException("Please input right point");
     }
 
-    private void validateVertex(String point){
+    public void validateVertex(String point){
         if (!GraphModelUtil.hasPoint(point)) {
             throw new IllegalArgumentException("Please input right point");
         }
