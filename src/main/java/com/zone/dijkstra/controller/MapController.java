@@ -1,5 +1,6 @@
 package com.zone.dijkstra.controller;
 
+import com.zone.dijkstra.core.Dijkstra;
 import com.zone.dijkstra.core.Graph;
 import com.zone.dijkstra.service.IMapService;
 import com.zone.dijkstra.vo.ServerResponse;
@@ -30,5 +31,15 @@ public class MapController {
         Graph graph = mapService.calculate(mapId);
         System.out.println(graph.adj("P012"));
         return ResponseEntity.ok(ServerResponse.success(graph.toString()));
+    }
+
+    @RequestMapping("/calculate/{mapId}/{start}/{end}")
+    public ResponseEntity path(@PathVariable Long mapId,
+                               @PathVariable int start,
+                               @PathVariable String end){
+        Graph graph = mapService.calculate(mapId);
+        Dijkstra dijkstra = new Dijkstra(graph,start);
+
+        return ResponseEntity.ok(ServerResponse.success(dijkstra.path(end)));
     }
 }

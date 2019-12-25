@@ -119,20 +119,20 @@ public class Dijkstra {
         }
     }
 
-    public boolean isConnectedTo(int v){
+    public boolean isConnectedTo(int v) {
         graph.validateVertex(GraphModelUtil.integer2PointName(v));
         return isMin[v];
     }
 
-    public Iterable<Integer> path(int t){
+    private Iterable<Integer> path(int t) {
         ArrayList<Integer> res = new ArrayList<>();
 
-        if (!isConnectedTo(t)){
+        if (!isConnectedTo(t)) {
             return res;
         }
 
         int cur = t;
-        while (cur != s){
+        while (cur != s) {
             res.add(cur);
             cur = pre[cur];
         }
@@ -142,4 +142,22 @@ public class Dijkstra {
 
         return res;
     }
+
+    /**
+     * 对外提供接口  与核心计算所使用的点区分
+     *
+     * @param point
+     * @return
+     */
+    public Iterable<String> path(String point) {
+        ArrayList<String> res = new ArrayList<>();
+
+        int t = GraphModelUtil.pointName2Integer(point);
+        ArrayList<Integer> list = (ArrayList<Integer>) this.path(t);
+
+        GraphModelUtil.dijkstraResultToString(list, res);
+        return res;
+    }
+
+
 }
